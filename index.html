@@ -206,41 +206,54 @@
 
     .menu-dropdown a:hover { color: var(--ink); }
     /* Latest items */
-.latest {
-  display: flex;
-  gap: 3rem;
-  margin-top: 2.5rem;
-  opacity: 0;
-  animation: fadeIn 1s 1.3s ease forwards;
-  font-family: 'DM Mono', monospace;
-}
-
-.latest-block {
-  text-align: left;
-}
-
-.latest-label {
-  font-size: 0.55rem;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 0.5rem;
-}
-
-.latest-title {
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  color: var(--ink);
-  text-decoration: none;
-  display: block;
-  transition: color 0.2s ease;
-  max-width: 180px;
-  line-height: 1.6;
-}
-
-.latest-title:hover {
-  color: var(--muted);
-}
+    .latest {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-top: 2.5rem;
+      opacity: 0;
+      animation: fadeIn 1s 1.3s ease forwards;
+      font-family: 'DM Mono', monospace;
+      width: 100%;
+      border-top: 1px solid #1e1e1e;
+    }
+    
+    .latest-block {
+      text-align: left;
+      padding: 1rem 0;
+      border-bottom: 1px solid #1e1e1e;
+    }
+    
+    .latest-block:first-child {
+      border-right: 1px solid #1e1e1e;
+      padding-right: 1.5rem;
+    }
+    
+    .latest-block:last-child {
+      padding-left: 1.5rem;
+    }
+    
+    .latest-label {
+      font-size: 0.55rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    
+    .latest-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--ink);
+      text-decoration: none;
+      display: block;
+      transition: color 0.2s ease;
+      line-height: 1.6;
+    }
+    
+    .latest-title:hover {
+      color: var(--muted);
+    }
   </style>
 </head>
 <body>
