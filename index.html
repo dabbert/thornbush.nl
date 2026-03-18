@@ -205,6 +205,42 @@
     .menu-dropdown.open a:nth-child(4) { transition-delay: 0.20s; }
 
     .menu-dropdown a:hover { color: var(--ink); }
+    /* Latest items */
+.latest {
+  display: flex;
+  gap: 3rem;
+  margin-top: 2.5rem;
+  opacity: 0;
+  animation: fadeIn 1s 1.3s ease forwards;
+  font-family: 'DM Mono', monospace;
+}
+
+.latest-block {
+  text-align: left;
+}
+
+.latest-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.latest-title {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  text-decoration: none;
+  display: block;
+  transition: color 0.2s ease;
+  max-width: 180px;
+  line-height: 1.6;
+}
+
+.latest-title:hover {
+  color: var(--muted);
+}
   </style>
 </head>
 <body>
@@ -244,7 +280,18 @@
     <div class="divider"></div>
 
     <p class="tagline">Personal reflections on the digital transformation of the public sector</p>
-
+    
+    <div class="latest">
+      <div class="latest-block">
+        <div class="latest-label">Latest reflection</div>
+        <a href="reflections.html" class="latest-title">Article title</a>
+      </div>
+      <div class="latest-block">
+        <div class="latest-label">Latest project</div>
+        <a href="projects.html" class="latest-title">Project title</a>
+      </div>
+    </div>
+    
   </div>
   <script>
     const toggle = document.getElementById('toggle');
