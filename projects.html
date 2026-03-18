@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300&display=swap" rel="stylesheet">
-  <script defer src="https://cloud.umami.is/script.js" data-website-id="e0c3e865-891e-4e66-99ab-8a72d214063d"></script>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -192,11 +191,35 @@
       white-space: nowrap;
     }
 
+    .item-tags {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .item-tag {
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.5rem;
+      text-decoration: none;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .item-tag:hover {
+      color: var(--ink);
+      border-color: var(--muted);
+    }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
   </style>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="e0c3e865-891e-4e66-99ab-8a72d214063d"></script>
 </head>
 <body>
 
@@ -206,7 +229,7 @@
     </button>
     <div class="menu-dropdown" id="dropdown">
       <a href="about.html">About</a>
-      <a href="reflections#">Reflections</a>
+      <a href="reflections.html">Reflections</a>
       <a href="projects.html" class="active">Projects</a>
       <a href="https://www.linkedin.com/in/dabbert/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
@@ -227,6 +250,9 @@
         <div>
           <div class="project-title">Project title</div>
           <div class="project-desc">Short description of the project</div>
+          <div class="item-tags">
+            <a href="tag.html?tag=digital-government" class="item-tag">Digital Government</a>
+          </div>
         </div>
         <div class="project-year">Year</div>
       </div>
@@ -235,6 +261,9 @@
         <div>
           <div class="project-title">Project title</div>
           <div class="project-desc">Short description of the project</div>
+          <div class="item-tags">
+            <a href="tag.html?tag=open-source" class="item-tag">Open Source</a>
+          </div>
         </div>
         <div class="project-year">Year</div>
       </div>
@@ -243,6 +272,10 @@
         <div>
           <div class="project-title">Project title</div>
           <div class="project-desc">Short description of the project</div>
+          <div class="item-tags">
+            <a href="tag.html?tag=digital-government" class="item-tag">Digital Government</a>
+            <a href="tag.html?tag=open-source" class="item-tag">Open Source</a>
+          </div>
         </div>
         <div class="project-year">Year</div>
       </div>

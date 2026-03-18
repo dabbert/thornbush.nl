@@ -3,17 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Thornbush</title>
+  <title>Tag — Thornbush</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230d0d0d'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='38' font-weight='400' text-anchor='middle' fill='%23e8e4dc'%3ET%3C/text%3E%3Cline x1='32' y1='56' x2='32' y2='18' stroke='%23e8e4dc' stroke-width='1'/%3E%3Cline x1='32' y1='36' x2='24' y2='28' stroke='%23e8e4dc' stroke-width='1'/%3E%3Cline x1='32' y1='44' x2='40' y2='37' stroke='%23e8e4dc' stroke-width='1'/%3E%3Ccircle cx='24' cy='28' r='1.5' fill='%23e8e4dc'/%3E%3Ccircle cx='40' cy='37' r='1.5' fill='%23e8e4dc'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --bg: #0d0d0d;
@@ -22,9 +18,7 @@
       --border: #1e1e1e;
     }
 
-    html, body {
-      min-height: 100%;
-    }
+    html, body { min-height: 100%; }
 
     body {
       background-color: var(--bg);
@@ -35,7 +29,6 @@
       padding: 2rem;
     }
 
-    /* Grain overlay */
     body::before {
       content: '';
       position: fixed;
@@ -46,13 +39,11 @@
       opacity: 0.5;
     }
 
-    /* Menu */
     .menu {
       position: fixed;
       top: 2rem;
       left: 2rem;
       z-index: 10;
-      font-family: 'DM Mono', monospace;
     }
 
     .menu-toggle {
@@ -109,9 +100,6 @@
     .menu-dropdown.open a:nth-child(4) { transition-delay: 0.20s; }
     .menu-dropdown a:hover { color: var(--ink); }
 
-    .menu-dropdown a.active { color: var(--ink); }
-
-    /* Page layout */
     .page {
       position: relative;
       z-index: 1;
@@ -122,7 +110,6 @@
       animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
-    /* Back link */
     .back {
       display: inline-flex;
       align-items: center;
@@ -138,21 +125,20 @@
     .back:hover { color: var(--ink); }
     .back::before { content: '←'; font-size: 0.8rem; }
 
-    /* Page title */
+    .tag-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
     .page-title {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(2.5rem, 7vw, 4rem);
       letter-spacing: 0.2em;
       color: var(--ink);
       line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-
-    .page-subtitle {
-      font-size: 0.65rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--muted);
       margin-bottom: 3rem;
     }
 
@@ -163,84 +149,58 @@
       margin-bottom: 3rem;
     }
 
-    /* Bio section */
-    .bio {
-      font-size: 0.82rem;
-      line-height: 2;
-      color: #a09c96;
-      margin-bottom: 3.5rem;
-    }
-
-    /* Section headers */
     .section-label {
       font-size: 0.6rem;
       letter-spacing: 0.35em;
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 1.5rem;
+      margin-top: 2.5rem;
     }
 
-    /* Experience */
-    .experience {
-      margin-bottom: 3.5rem;
-    }
+    .section-label:first-of-type { margin-top: 0; }
 
-    .experience-item {
+    .result-item {
       display: grid;
       grid-template-columns: 1fr auto;
       align-items: baseline;
       gap: 1rem;
       padding: 1rem 0;
       border-bottom: 1px solid var(--border);
+      text-decoration: none;
     }
 
-    .experience-item:first-of-type {
-      border-top: 1px solid var(--border);
-    }
+    .result-item:first-of-type { border-top: 1px solid var(--border); }
 
-    .exp-role {
+    .result-title {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1rem;
       letter-spacing: 0.15em;
       color: var(--ink);
+      transition: color 0.2s ease;
     }
 
-    .exp-org {
+    .result-item:hover .result-title { color: var(--muted); }
+
+    .result-desc {
       font-size: 0.65rem;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.1em;
       color: var(--muted);
       margin-top: 0.2rem;
     }
 
-    .exp-year {
+    .result-meta {
       font-size: 0.6rem;
       letter-spacing: 0.15em;
       color: var(--muted);
       white-space: nowrap;
     }
 
-    /* Expertise */
-    .expertise {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-    }
-
-    .tag {
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+    .no-results {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
       color: var(--muted);
-      border: 1px solid var(--border);
-      padding: 0.4rem 0.8rem;
-      text-decoration: none;
-      display: inline-block;
-      transition: color 0.2s ease, border-color 0.2s ease;
-    }
-
-    .tag:hover {
-      color: var(--ink);
-      border-color: var(--muted);
+      padding: 2rem 0;
     }
 
     @keyframes fadeUp {
@@ -254,12 +214,10 @@
 
   <nav class="menu">
     <button class="menu-toggle" id="toggle" aria-label="Open menu">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
     <div class="menu-dropdown" id="dropdown">
-      <a href="about.html" class="active">About</a>
+      <a href="about.html">About</a>
       <a href="reflections.html">Reflections</a>
       <a href="projects.html">Projects</a>
       <a href="https://www.linkedin.com/in/dabbert/" target="_blank" rel="noopener">LinkedIn</a>
@@ -267,59 +225,93 @@
   </nav>
 
   <main class="page">
-
-    <a href="index.html" class="back">Thornbush</a>
-
-    <h1 class="page-title">About</h1>
-    <p class="page-subtitle">thornbush.nl</p>
+    <a href="javascript:history.back()" class="back">Back</a>
+    <p class="tag-label">Tag</p>
+    <h1 class="page-title" id="tag-title">—</h1>
     <div class="divider"></div>
-
-    <!-- Bio -->
-    <p class="bio">
-      Placeholder bio — replace this with your own introduction. This is where you tell visitors who you are, what drives you, and why you write about the digital transformation of the public sector. Keep it concise, personal, and honest.
-    </p>
-
-    <!-- Experience -->
-    <div class="experience">
-      <p class="section-label">Experience</p>
-
-      <div class="experience-item">
-        <div>
-          <div class="exp-role">Role</div>
-          <div class="exp-org">Organisation</div>
-        </div>
-        <div class="exp-year">Year — Year</div>
-      </div>
-
-      <div class="experience-item">
-        <div>
-          <div class="exp-role">Role</div>
-          <div class="exp-org">Organisation</div>
-        </div>
-        <div class="exp-year">Year — Year</div>
-      </div>
-
-      <div class="experience-item">
-        <div>
-          <div class="exp-role">Role</div>
-          <div class="exp-org">Organisation</div>
-        </div>
-        <div class="exp-year">Year — Year</div>
-      </div>
-    </div>
-
-    <!-- Expertise -->
-    <div>
-      <p class="section-label">Expertise</p>
-      <div class="expertise">
-        <a href="tag.html?tag=digital-government" class="tag">Digital Government</a>
-        <a href="tag.html?tag=open-source" class="tag">Open Source</a>
-      </div>
-    </div>
-
+    <div id="results"></div>
   </main>
 
   <script>
+    // =====================================================
+    // CONTENT INDEX — add a new entry here for every post
+    // or project you publish. Tags must match exactly.
+    // =====================================================
+    const content = [
+
+      // REFLECTIONS
+      // {
+      //   type: 'reflection',
+      //   title: 'Your post title',
+      //   desc: 'One line summary',
+      //   date: '01 Jan 2026',
+      //   url: 'your-post-filename.html',
+      //   tags: ['digital-government', 'open-source']
+      // },
+
+      // PROJECTS
+      // {
+      //   type: 'project',
+      //   title: 'Your project title',
+      //   desc: 'One line summary',
+      //   date: '2025',
+      //   url: 'projects.html',
+      //   tags: ['open-source']
+      // },
+
+    ];
+
+    // Tag display names
+    const tagNames = {
+      'digital-government': 'Digital Government',
+      'open-source': 'Open Source',
+    };
+
+    // Read tag from URL
+    const params = new URLSearchParams(window.location.search);
+    const activeTag = params.get('tag') || '';
+    const displayName = tagNames[activeTag] || activeTag;
+
+    document.title = displayName + ' — Thornbush';
+    document.getElementById('tag-title').textContent = displayName;
+
+    // Filter content
+    const filtered = content.filter(item => item.tags.includes(activeTag));
+    const reflections = filtered.filter(i => i.type === 'reflection');
+    const projects = filtered.filter(i => i.type === 'project');
+
+    const container = document.getElementById('results');
+
+    function renderSection(label, items) {
+      if (items.length === 0) return;
+      const heading = document.createElement('p');
+      heading.className = 'section-label';
+      heading.textContent = label;
+      container.appendChild(heading);
+
+      items.forEach((item, i) => {
+        const a = document.createElement('a');
+        a.className = 'result-item' + (i === 0 ? ' first' : '');
+        a.href = item.url;
+        a.innerHTML = `
+          <div>
+            <div class="result-title">${item.title}</div>
+            <div class="result-desc">${item.desc}</div>
+          </div>
+          <div class="result-meta">${item.date}</div>
+        `;
+        container.appendChild(a);
+      });
+    }
+
+    if (filtered.length === 0) {
+      container.innerHTML = '<p class="no-results">No content found for this tag yet.</p>';
+    } else {
+      renderSection('Reflections', reflections);
+      renderSection('Projects', projects);
+    }
+
+    // Menu toggle
     const toggle = document.getElementById('toggle');
     const dropdown = document.getElementById('dropdown');
     toggle.addEventListener('click', () => {
