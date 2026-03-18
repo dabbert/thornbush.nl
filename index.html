@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thornbush</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inconsolata:wght@300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f5f2ed;
+      --ink: #1a1814;
+      --muted: #9e9a94;
+      --thorn: #2d2a26;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    /* Subtle grain texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      animation: fadeUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .wordmark {
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 300;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--thorn);
+      line-height: 1;
+    }
+
+    .wordmark span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: letterIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Stagger each letter */
+    .wordmark span:nth-child(1)  { animation-delay: 0.05s; }
+    .wordmark span:nth-child(2)  { animation-delay: 0.10s; }
+    .wordmark span:nth-child(3)  { animation-delay: 0.15s; }
+    .wordmark span:nth-child(4)  { animation-delay: 0.20s; }
+    .wordmark span:nth-child(5)  { animation-delay: 0.25s; }
+    .wordmark span:nth-child(6)  { animation-delay: 0.30s; }
+    .wordmark span:nth-child(7)  { animation-delay: 0.35s; }
+    .wordmark span:nth-child(8)  { animation-delay: 0.40s; }
+    .wordmark span:nth-child(9)  { animation-delay: 0.45s; }
+
+    .divider {
+      width: 32px;
+      height: 1px;
+      background: var(--muted);
+      margin: 2rem auto;
+      opacity: 0;
+      animation: fadeIn 1s 0.8s ease forwards;
+    }
+
+    .tagline {
+      font-family: 'Inconsolata', monospace;
+      font-weight: 300;
+      font-size: clamp(0.65rem, 2vw, 0.78rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0;
+      animation: fadeIn 1s 1s ease forwards;
+    }
+
+    /* Thorn illustration */
+    .thorn-svg {
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeIn 1.2s 0.2s ease forwards;
+    }
+
+    @keyframes letterIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Minimal thorn illustration -->
+    <div class="thorn-svg">
+      <svg width="48" height="72" viewBox="0 0 48 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="24" y1="72" x2="24" y2="0" stroke="#2d2a26" stroke-width="0.8"/>
+        <line x1="24" y1="28" x2="10" y2="14" stroke="#2d2a26" stroke-width="0.8"/>
+        <line x1="24" y1="42" x2="38" y2="30" stroke="#2d2a26" stroke-width="0.8"/>
+        <line x1="24" y1="54" x2="12" y2="44" stroke="#2d2a26" stroke-width="0.8"/>
+        <circle cx="10" cy="14" r="1.5" fill="#2d2a26"/>
+        <circle cx="38" cy="30" r="1.5" fill="#2d2a26"/>
+        <circle cx="12" cy="44" r="1.5" fill="#2d2a26"/>
+      </svg>
+    </div>
+
+    <div class="wordmark" aria-label="Thornbush">
+      <span>T</span><span>H</span><span>O</span><span>R</span><span>N</span><span>B</span><span>U</span><span>S</span><span>H</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="tagline">Portfolio &mdash; Coming soon</p>
+
+  </div>
+</body>
+</html>
