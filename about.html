@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Thornbush</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230d0d0d'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='38' font-weight='400' text-anchor='middle' fill='%23e8e4dc'%3ET%3C/text%3E%3Cline x1='32' y1='56' x2='32' y2='18' stroke='%23e8e4dc' stroke-width='1'/%3E%3Cline x1='32' y1='36' x2='24' y2='28' stroke='%23e8e4dc' stroke-width='1'/%3E%3Cline x1='32' y1='44' x2='40' y2='37' stroke='%23e8e4dc' stroke-width='1'/%3E%3Ccircle cx='24' cy='28' r='1.5' fill='%23e8e4dc'/%3E%3Ccircle cx='40' cy='37' r='1.5' fill='%23e8e4dc'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0d0d0d;
+      --ink: #e8e4dc;
+      --muted: #555250;
+      --border: #1e1e1e;
+    }
+
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    /* Menu */
+    .menu {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      z-index: 10;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .menu-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--ink);
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+
+    .menu-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    .menu-dropdown {
+      margin-top: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .menu-dropdown.open { max-height: 300px; }
+
+    .menu-dropdown a {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: color 0.2s ease, opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .menu-dropdown.open a { opacity: 1; transform: translateX(0); }
+    .menu-dropdown.open a:nth-child(1) { transition-delay: 0.05s; }
+    .menu-dropdown.open a:nth-child(2) { transition-delay: 0.10s; }
+    .menu-dropdown.open a:nth-child(3) { transition-delay: 0.15s; }
+    .menu-dropdown.open a:nth-child(4) { transition-delay: 0.20s; }
+    .menu-dropdown a:hover { color: var(--ink); }
+
+    .menu-dropdown a.active { color: var(--ink); }
+
+    /* Page layout */
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      padding-top: 7rem;
+      padding-bottom: 6rem;
+      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* Back link */
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 3rem;
+      transition: color 0.2s ease;
+    }
+    .back:hover { color: var(--ink); }
+    .back::before { content: '←'; font-size: 0.8rem; }
+
+    /* Page title */
+    .page-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 7vw, 4rem);
+      letter-spacing: 0.2em;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-subtitle {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3rem;
+    }
+
+    .divider {
+      width: 32px;
+      height: 1px;
+      background: var(--muted);
+      margin-bottom: 3rem;
+    }
+
+    /* Bio section */
+    .bio {
+      font-size: 0.82rem;
+      line-height: 2;
+      color: #a09c96;
+      margin-bottom: 3.5rem;
+    }
+
+    /* Section headers */
+    .section-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Experience */
+    .experience {
+      margin-bottom: 3.5rem;
+    }
+
+    .experience-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .experience-item:first-of-type {
+      border-top: 1px solid var(--border);
+    }
+
+    .exp-role {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      color: var(--ink);
+    }
+
+    .exp-org {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    .exp-year {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* Expertise */
+    .expertise {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.8rem;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .tag:hover {
+      color: var(--ink);
+      border-color: var(--muted);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="menu">
+    <button class="menu-toggle" id="toggle" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="menu-dropdown" id="dropdown">
+      <a href="about.html" class="active">Over mij</a>
+      <a href="#">Projecten</a>
+      <a href="#">Blog / Artikelen</a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </nav>
+
+  <main class="page">
+
+    <a href="index.html" class="back">Thornbush</a>
+
+    <h1 class="page-title">About</h1>
+    <p class="page-subtitle">thornbush.nl</p>
+    <div class="divider"></div>
+
+    <!-- Bio -->
+    <p class="bio">
+      Placeholder bio — replace this with your own introduction. This is where you tell visitors who you are, what drives you, and why you write about the digital transformation of the public sector. Keep it concise, personal, and honest.
+    </p>
+
+    <!-- Experience -->
+    <div class="experience">
+      <p class="section-label">Experience</p>
+
+      <div class="experience-item">
+        <div>
+          <div class="exp-role">Role</div>
+          <div class="exp-org">Organisation</div>
+        </div>
+        <div class="exp-year">Year — Year</div>
+      </div>
+
+      <div class="experience-item">
+        <div>
+          <div class="exp-role">Role</div>
+          <div class="exp-org">Organisation</div>
+        </div>
+        <div class="exp-year">Year — Year</div>
+      </div>
+
+      <div class="experience-item">
+        <div>
+          <div class="exp-role">Role</div>
+          <div class="exp-org">Organisation</div>
+        </div>
+        <div class="exp-year">Year — Year</div>
+      </div>
+    </div>
+
+    <!-- Expertise -->
+    <div>
+      <p class="section-label">Expertise</p>
+      <div class="expertise">
+        <span class="tag">Expertise</span>
+        <span class="tag">Expertise</span>
+        <span class="tag">Expertise</span>
+        <span class="tag">Expertise</span>
+        <span class="tag">Expertise</span>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const toggle = document.getElementById('toggle');
+    const dropdown = document.getElementById('dropdown');
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('open');
+      dropdown.classList.toggle('open');
+    });
+  </script>
+
+</body>
+</html>
